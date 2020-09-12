@@ -56,4 +56,4 @@ function watch() {
 
 gulp.task(watch)
 
-gulp.task('default', gulp.series(browser_sync, watch));
+gulp.task('default', gulp.series(gulp.parallel(browser_sync, watch)));

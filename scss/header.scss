@@ -6,7 +6,7 @@ body {
 	min-width: 320px;
 	position: relative;
 	line-height: 1.6;
-	font-family: "RobotoRegular", sans-serif;
+	font-family: 'Domine', serif;
 	overflow-x: hidden;
 }
 
@@ -14,6 +14,92 @@ body {
 	display: none;
 }
 
-.salom{
-	color: $purples;
+.header {
+	min-height: 100vh;
+	background-image: url("../img/bgimage.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+
+	.bg {
+		background: rgba(0, 0, 0, 0.6);
+		min-height: 100vh;
+	}
+}
+
+.top-menu {
+	color: #ffffff;
+	display: flex;
+	border: 1px solid #FCEDED;
+
+
+	.lang {
+		display: flex;
+		flex-basis: 5%;
+		align-items: center;
+		justify-content: center;
+
+		i {
+			margin-left: 5px;
+		}
+	}
+
+	.menu {
+		display: flex;
+		flex-basis: 75%;
+		border-left: 1px solid #FCEDED;
+		border-right: 1px solid #FCEDED;
+		align-items: center;
+		justify-content: center;
+
+
+		ul {
+			display: flex;
+			width: 100%;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			justify-content: center;
+			padding-left: 200px;
+
+			li {
+				text-transform: uppercase;
+				margin-right: 50px;
+
+				i {
+					margin-right: 8px;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+
+	.pro-menu {
+		border-left: none;
+		display: flex;
+		flex-basis: 23%;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		span {
+			margin-right: 15px;
+			text-transform: uppercase;
+		}
+
+		.img {
+			border-right: 1px solid #FCEDED;
+			padding: 10px;
+
+			img {
+				border-radius: 50%;
+
+				height: 42px;
+				width: 42px;
+			}
+		}
+	}
 }
