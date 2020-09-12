@@ -7,16 +7,18 @@ var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	uglify = require('gulp-uglify');
 
-gulp.task('browser-sync', ['styles', 'scripts'], function () {
+function browser_sync() {
 	browserSync.init({
 		server: {
 			baseDir: "./app"
 		},
 		notify: false
 	});
-});
+};
 
-gulp.task('styles', function () {
+gulp.task(browser_sync, gulp.series(styles, scripts))
+
+function styles() {
 	return gulp.src('scss/*.scss')
 		.pipe(sass({
 			includePaths: require('node-bourbon').includePaths
@@ -26,9 +28,12 @@ gulp.task('styles', function () {
 		.pipe(cleanCSS())
 		.pipe(gulp.dest('app/css'))
 		.pipe(browserSync.stream());
-});
+};
 
-gulp.task('scripts', function () {
+gulp.task(styles)
+
+
+function scripts() {
 	return gulp.src([
 		'./app/libs/modernizr/modernizr.js',
 		'./app/libs/jquery/jquery-1.11.2.min.js',
@@ -38,13 +43,17 @@ gulp.task('scripts', function () {
 		.pipe(concat('libs.js'))
 		// .pipe(uglify()) //Minify libs.js
 		.pipe(gulp.dest('./app/js/'));
-});
+};
 
-gulp.task('watch', function () {
-	gulp.watch('scss/*.scss', ['styles']);
-	gulp.watch('app/libs/**/*.js', ['scripts']);
+gulp.task(scripts)
+
+function watch() {
+	gulp.watch('scss/*.scss', gulp.series(styles));
+	gulp.watch('app/libs/**/*.js', gulp.series(scripts));
 	gulp.watch('app/js/*.js').on("change", browserSync.reload);
 	gulp.watch('app/*.html').on('change', browserSync.reload);
-});
+};
 
-gulp.task('default', ['browser-sync', 'watch']);
+gulp.task(watch)
+
+gulp.task('default', gulp.series(browser_sync, watch));
